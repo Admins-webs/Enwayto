@@ -1,7 +1,7 @@
 {
-  "name": "Raol Api'S",
-  "version": "v7.1.0",
-  "description": "Simple and easy to use API documentation.",
+  "name": "DeepApi'S",
+  "version": "V9.1.0",
+  "description": "Simple Api DeepApi's For Free.",
   "maintenance": {
     "enabled": false,
     "message": ""
@@ -12,22 +12,22 @@
     "status": "Online"
   },
   "apiSettings": {
-    "creator": "RaolByte",
+    "creator": "DeepNewt",
     "requireApikey": false,
     "apikey": {
       "demo": {
-        "rateLimit": "5000/day",
+        "rateLimit": "5124/day",
         "enabled": true
       },
       "admin": {
         "rateLimit": "unlimited",
         "enabled": true
       },
-      "Raol": {
+      "DeepNewt": {
         "rateLimit": "unlimited",
         "enabled": true,
         "category": "premium",
-        "name": "Raol"
+        "name": "DeepNewt"
       }
     }
   },
@@ -83,8 +83,8 @@
   ],
   "apiKeys": [
     {
-      "key": "Raol",
-      "name": "Raol",
+      "key": "Ayuku",
+      "name": "DeepNewt",
       "category": "premium",
       "ratelimit": "unlimited",
       "active": true,
