@@ -1,53 +1,49 @@
-import axios from "axios"
-import { createApiKeyMiddleware } from "../../middleware/apikey.js"
+import axios from "axios";
 
 export default (app) => {
 
-  async function fetchContent(content) {
+  async function fetchDeepseek(prompt) {
     try {
-      // 🔥 Panggil API Anabot DeepSeek
-      const response = await axios.get(
-        "https://anabot.my.id/api/ai/deepseek",
-        {
-          params: {
-            prompt: content,
-            search_enabled: false,
-            thinking_enabled: false,
-            apikey: "free"
-          }
-        }
-      )
+      const response = await axios.get("https://api.siputzx.my.id/api/ai/deepseekr1", {
+        params: {
+          prompt: prompt,
+          system: "You are a helpful assistant.",
+          temperature: 0.7
+        },
+        timeout: 10000
+      });
 
-      return {
-        result: response.data?.result || response.data || "Tidak ada output."
-      }
-
+      return response.data;
     } catch (error) {
-      console.error("Error fetching content from DeepSeek Anabot:", error)
-      throw error
+      console.error("DeepSeek Error:", error.response?.data || error.message);
+      throw new Error("Failed to fetch from DeepSeek");
     }
   }
 
-  app.get("/ai/luminai", createApiKeyMiddleware(), async (req, res) => {
+  app.get("/ai/deepseek", async (req, res) => {
     try {
-      const { text } = req.query
+      const { text } = req.query;
 
       if (!text) {
-        return res.status(400).json({ status: false, error: "Text is required" })
+        return res.status(400).json({
+          status: false,
+          error: "Parameter 'text' wajib diisi"
+        });
       }
 
-      const { result } = await fetchContent(text)
+      const data = await fetchDeepseek(text);
 
-      return res.status(200).json({
+      res.status(200).json({
         status: true,
-        result
-      })
+        result: data.result || data
+      });
 
     } catch (error) {
       res.status(500).json({
         status: false,
         error: error.message
-      })
+      });
     }
-  })
-    }
+  });
+
+};
