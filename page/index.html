@@ -2,1454 +2,634 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepApi'S - REST API Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DeepApi'S | REST API Suite</title>
     <link rel="icon" href="/src/images/icon.png" type="image/png">
     <link rel="apple-touch-icon" href="/src/images/icon.png">
     <link rel="shortcut icon" href="/src/images/icon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        :root {
-            --background: #f9fbff;
-            --foreground: #2c3e50;
-            --card: #ffffff;
-            --card-foreground: #2c3e50;
-            --primary: #6c5ce7;
-            --primary-foreground: #ffffff;
-            --secondary: #a29bfe;
-            --accent: #00cec9;
-            --muted: #f1f5f9;
-            --muted-foreground: #7f8c8d;
-            --border: rgba(0, 0, 0, 0.06);
-            --radius: 0.75rem;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.12);
-            --gradient-primary: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-            --gradient-secondary: linear-gradient(135deg, #a29bfe 0%, #00cec9 100%);
-        }
-
-
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-deep: #0a0c10;
+            --surface: #111318;
+            --card-bg: #14171f;
+            --pure-white: #ffffff;
+            --soft-white: #f0f3fa;
+            --blue-bright: #3b82f6;
+            --blue-glow: #60a5fa;
+            --blue-dark: #1e3a8a;
+            --accent-blue: #0ea5e9;
+            --gray-line: #2a2e3a;
+            --text-primary: #eef2ff;
+            --text-secondary: #9ca3af;
+            --shadow-heavy: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
+            --glass-border: rgba(59, 130, 246, 0.2);
+            --transition-smooth: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--background);
-            color: var(--foreground);
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.5;
             overflow-x: hidden;
-            transition: all 0.3s ease;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1d24;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--blue-bright);
+            border-radius: 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        /* Navigation */
+        /* futuristic nav */
         .nav {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+            width: 100%;
+            background: rgba(10, 12, 16, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
             z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
+            transition: var(--transition-smooth);
         }
-
-
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
         }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 0.75rem 1rem;
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-container {
-                padding: 0.5rem 0.75rem;
-                gap: 0.75rem;
-            }
-        }
-
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--foreground);
-            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            transition: all 0.3s ease;
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            transition: transform 0.2s ease;
         }
-
         .logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
-
         .logo-icon {
-            width: 3.5rem;
-            height: 3.5rem;
-            background: transparent;
-            border-radius: 0.75rem;
+            width: 44px;
+            height: 44px;
+            background: rgba(59, 130, 246, 0.15);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--foreground);
-            font-size: 1.75rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(59, 130, 246, 0.4);
         }
-
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .logo:hover .logo-icon::before {
-            left: 100%;
-        }
-
         .logo-icon img {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 32px;
+            height: 32px;
             object-fit: contain;
+            filter: brightness(0) invert(1);
         }
-
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2.2rem;
             list-style: none;
-            align-items: center;
         }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 70px;
-                left: 1rem;
-                right: 1rem;
-                background: var(--background);
-                border: 1px solid var(--border);
-                border-radius: 1rem;
-                flex-direction: column;
-                padding: 1.5rem;
-                gap: 0.5rem;
-                box-shadow: var(--shadow-lg);
-                z-index: 999;
-                max-width: calc(100vw - 2rem);
-            }
-
-            .nav-links.mobile-active {
-                display: flex;
-            }
-        }
-
         .nav-links a {
             text-decoration: none;
-            color: var(--foreground);
             font-weight: 500;
-            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            transition: var(--transition-smooth);
+            font-size: 1rem;
             position: relative;
             padding: 0.5rem 0;
         }
-
-        @media (max-width: 768px) {
-            .nav-links a {
-                padding: 1rem;
-                width: 100%;
-                text-align: center;
-                border-radius: 0.5rem;
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                touch-action: manipulation;
-                -webkit-tap-highlight-color: transparent;
-            }
-
-            .nav-links a:hover {
-                background: var(--muted);
-            }
-
-            .nav-links a:active {
-                background: var(--muted);
-                transform: scale(0.98);
-            }
-        }
-
         .nav-links a:hover {
-            color: var(--primary);
-            transform: translateY(-1px);
+            color: var(--blue-bright);
         }
-
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -4px;
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--gradient-primary);
-            transition: width 0.3s ease;
+            background: var(--blue-bright);
+            transition: width 0.3s;
+            border-radius: 4px;
         }
-
         .nav-links a:hover::after {
             width: 100%;
         }
-
-
         .mobile-menu {
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
-            color: var(--foreground);
+            color: var(--pure-white);
+            font-size: 1.8rem;
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
-            min-width: 44px;
-            min-height: 44px;
-            align-items: center;
-            justify-content: center;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        .mobile-menu:hover {
-            background: var(--muted);
-            color: var(--primary);
-        }
-
-        .mobile-menu:active {
-            background: var(--muted);
-            transform: scale(0.95);
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu {
-                display: flex;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .mobile-menu {
-                font-size: 1.25rem;
-                padding: 0.75rem;
-                min-width: 48px;
-                min-height: 48px;
-            }
-        }
-
-        /* Hero Section */
+        /* hero transformation */
         .hero {
-            padding: 10rem 0 6rem;
-            background: linear-gradient(135deg, var(--background) 0%, var(--muted) 100%);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
             min-height: 100vh;
             display: flex;
             align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                padding: 8rem 0 4rem;
-                min-height: 80vh;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                padding: 6rem 0 3rem;
-                min-height: 70vh;
-            }
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(234, 88, 12, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-content {
+            padding: 8rem 0 6rem;
             position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
+            background: radial-gradient(circle at 20% 30%, rgba(59,130,246,0.08) 0%, #0a0c10 70%);
         }
-
+        .hero-content {
+            max-width: 860px;
+            margin: 0 auto;
+            text-align: center;
+            animation: floatGlow 2s ease-out;
+        }
+        @keyframes floatGlow {
+            0% { opacity: 0; transform: translateY(40px); filter: blur(6px);}
+            100% { opacity: 1; transform: translateY(0); filter: blur(0);}
+        }
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 2rem;
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--muted-foreground);
+            gap: 10px;
+            background: rgba(59,130,246,0.12);
+            border: 1px solid rgba(59,130,246,0.4);
+            padding: 0.6rem 1.4rem;
+            border-radius: 100px;
+            backdrop-filter: blur(8px);
             margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .gradient-text-badge {
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe, #00cec9, #ff7675);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 3s ease infinite;
-            font-weight: 600;
-        }
-
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease-out 0.1s both;
-            line-height: 1.1;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: clamp(2rem, 8vw, 3rem);
-            }
-        }
-
-        .hero p {
-            font-size: 1.375rem;
-            color: var(--muted-foreground);
-            margin-bottom: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease-out 0.2s both;
-            line-height: 1.7;
-        }
-
-        @media (max-width: 768px) {
-            .hero p {
-                font-size: 1.125rem;
-                margin-bottom: 2rem;
-                padding: 0 1rem;
-            }
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 3rem;
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-
-        @media (max-width: 768px) {
-            .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
-                margin-top: 2rem;
-            }
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--muted-foreground);
             font-weight: 500;
         }
-
+        .gradient-text-badge {
+            background: linear-gradient(120deg, #a5f3fc, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.2rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #ffffff, #7dd3fc, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
         .cta-buttons {
             display: flex;
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.3s both;
         }
-
-        @media (max-width: 768px) {
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-        }
-
         .btn {
-            padding: 1rem 2.5rem;
-            border-radius: var(--radius);
-            text-decoration: none;
+            padding: 0.9rem 2rem;
+            border-radius: 48px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.25s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
         }
-
-        @media (max-width: 768px) {
-            .btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-        }
-
         .btn-primary {
-            background: var(--gradient-primary);
-            color: var(--primary-foreground);
-            box-shadow: var(--shadow);
+            background: linear-gradient(105deg, #3b82f6, #2563eb);
+            color: white;
+            box-shadow: 0 8px 20px -8px #3b82f6;
         }
-
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-            filter: brightness(1.1);
+            box-shadow: 0 20px 30px -12px #3b82f6;
+            filter: brightness(1.05);
         }
-
         .btn-secondary {
             background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
+            color: #60a5fa;
+            border: 1.5px solid #3b82f6;
+            backdrop-filter: blur(4px);
         }
-
         .btn-secondary:hover {
-            background: var(--primary);
-            color: var(--primary-foreground);
+            background: rgba(59,130,246,0.1);
             transform: translateY(-3px);
+            border-color: #60a5fa;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3.5rem;
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #60a5fa;
         }
 
-        /* Features Section */
+        /* features reimagined */
         .features {
-            padding: 8rem 0;
-            background: var(--background);
-            position: relative;
+            padding: 6rem 0;
+            background: var(--surface);
+            border-top: 1px solid var(--gray-line);
+            border-bottom: 1px solid var(--gray-line);
         }
-
-        @media (max-width: 768px) {
-            .features {
-                padding: 4rem 0;
-            }
-        }
-
         .section-title {
             text-align: center;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
         }
-
-        @media (max-width: 768px) {
-            .section-title {
-                margin-bottom: 3rem;
-            }
-        }
-
         .section-title h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: var(--foreground);
-            background: var(--gradient-primary);
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #eef2ff, #60a5fa);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
         }
-
-        @media (max-width: 768px) {
-            .section-title h2 {
-                font-size: 2rem;
-            }
-        }
-
-        .section-title p {
-            font-size: 1.25rem;
-            color: var(--muted-foreground);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        @media (max-width: 768px) {
-            .section-title p {
-                font-size: 1rem;
-                padding: 0 1rem;
-            }
-        }
-
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
-
-        @media (max-width: 768px) {
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                margin-top: 3rem;
-            }
-        }
-
         .feature-card {
-            background: var(--card);
-            border-radius: 1rem;
-            padding: 2.5rem;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            background: var(--card-bg);
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid #2a2e3a;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(2px);
             text-align: center;
         }
-
-        @media (max-width: 768px) {
-            .feature-card {
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .feature-card {
-                padding: 1.5rem;
-            }
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
         .feature-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
+            border-color: #3b82f6;
+            box-shadow: 0 20px 30px -15px rgba(59,130,246,0.3);
         }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
         .feature-icon {
-            width: 4rem;
-            height: 4rem;
-            background: var(--gradient-primary);
-            border-radius: 1rem;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(145deg, #1e293b, #111827);
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2rem;
-            color: white;
-            font-size: 1.75rem;
-            transition: all 0.3s ease;
+            font-size: 2rem;
+            color: #60a5fa;
+            border: 1px solid #3b82f6;
         }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--foreground);
-        }
-
-        .feature-card p {
-            color: var(--muted-foreground);
-            line-height: 1.6;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 2000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--background);
-            border-radius: var(--radius);
-            padding: 2rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: slideIn 0.3s ease;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--muted-foreground);
-            transition: color 0.3s ease;
-        }
-
-        .close-btn:hover {
-            color: var(--foreground);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--foreground);
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            background: var(--background);
-            color: var(--foreground);
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
-        }
-
-        .response-area {
-            background: var(--muted);
-            border-radius: var(--radius);
-            padding: 1rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.875rem;
-            white-space: pre-wrap;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        /* FAQ Section */
+        /* FAQ glow */
         .faq {
-            padding: 8rem 0;
-            background: var(--muted);
-            position: relative;
+            padding: 6rem 0;
+            background: var(--bg-deep);
         }
-
-        @media (max-width: 768px) {
-            .faq {
-                padding: 4rem 0;
-            }
-        }
-
         .faq-icon {
-            width: 5rem;
-            height: 5rem;
-            background: var(--gradient-primary);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
             border-radius: 50%;
+            margin: 0 auto 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2rem;
-            color: white;
             font-size: 2.5rem;
-            box-shadow: var(--shadow-lg);
+            color: #3b82f6;
+            border: 1px solid #3b82f633;
         }
-
         .faq-container {
             max-width: 900px;
             margin: 0 auto;
         }
-
-        @media (max-width: 768px) {
-            .faq-container {
-                padding: 0 1rem;
-            }
-        }
-
         .faq-item {
-            background: var(--background);
-            border-radius: 1rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            transition: all 0.3s ease;
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #2a2e3a;
+            transition: all 0.2s;
         }
-
-        .faq-item:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
-        }
-
         .faq-question {
             width: 100%;
-            padding: 2rem;
             background: none;
             border: none;
-            text-align: left;
-            font-size: 1.25rem;
+            padding: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            color: var(--foreground);
-            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
+            color: #f0f3fa;
+            cursor: pointer;
         }
-
-        @media (max-width: 768px) {
-            .faq-question {
-                padding: 1.5rem;
-                font-size: 1.125rem;
-            }
-        }
-
-        .faq-question:hover {
-            color: var(--primary);
-        }
-
         .faq-chevron {
-            font-size: 1.25rem;
-            transition: transform 0.3s ease;
-            color: var(--muted-foreground);
+            transition: transform 0.3s;
+            color: #60a5fa;
         }
-
         .faq-item.active .faq-chevron {
             transform: rotate(180deg);
-            color: var(--primary);
         }
-
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease;
+            transition: max-height 0.4s ease-out;
         }
-
         .faq-answer.active {
-            max-height: 300px;
+            max-height: 220px;
         }
-
         .faq-answer-content {
-            padding: 0 2rem 2rem;
-            color: var(--muted-foreground);
-            line-height: 1.7;
-            font-size: 1rem;
+            padding: 0 1.5rem 1.8rem;
+            color: var(--text-secondary);
+            border-top: 1px solid #2a2e3a;
         }
-
-        @media (max-width: 768px) {
-            .faq-answer-content {
-                padding: 0 1.5rem 1.5rem;
-            }
+        /* modal modern */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
         }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .modal-content {
+            background: var(--card-bg);
+            max-width: 600px;
+            width: 90%;
+            border-radius: 32px;
+            padding: 2rem;
+            border: 1px solid #3b82f6;
+            box-shadow: var(--shadow-heavy);
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .response-area {
+            background: #0a0c10;
+            border-radius: 1rem;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            color: #b9e0ff;
         }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -60%);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
+        /* footer */
+        .main-footer {
+            background: #0c0e14;
+            border-top: 1px solid #2a2e3a;
+            padding: 2rem 0;
         }
-
-
-
-        /* Scroll animations */
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+        .footer-link:hover {
+            color: #60a5fa;
+        }
+        /* fade-in animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            transform: translateY(25px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
-
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Footer Section */
-        .main-footer {
-            background: var(--card);
-            color: var(--foreground);
-            padding: 2rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid var(--border);
-        }
-
         @media (max-width: 768px) {
-            .main-footer {
-                padding: 1.5rem 0;
-                margin-top: 2rem;
-            }
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .footer-content {
+            .nav-links {
+                display: none;
                 flex-direction: column;
-                text-align: center;
-                gap: 1.5rem;
-                padding: 0 1rem;
+                background: #111318cc;
+                backdrop-filter: blur(20px);
+                position: absolute;
+                top: 70px;
+                left: 1rem;
+                right: 1rem;
+                border-radius: 2rem;
+                padding: 1.5rem;
+                border: 1px solid #3b82f6;
             }
-        }
-
-        @media (max-width: 480px) {
-            .footer-content {
-                padding: 0 0.75rem;
+            .nav-links.mobile-active {
+                display: flex;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .hero-stats {
+                flex-direction: column;
                 gap: 1rem;
             }
-        }
-
-        .copyright {
-            color: var(--muted-foreground);
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .footer-middle {
-            display: flex;
-            align-items: center;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .footer-links {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 1rem;
+            .container {
+                padding: 0 1.2rem;
             }
         }
 
-        @media (max-width: 480px) {
-            .footer-links {
-                flex-direction: row;
-                gap: 0.75rem;
-                justify-content: center;
-                flex-wrap: nowrap;
-            }
+        /* custom button glow */
+        .btn-primary i, .btn-secondary i {
+            font-size: 1.2rem;
         }
-
-        @media (max-width: 360px) {
-            .footer-links {
-                gap: 0.5rem;
-            }
-        }
-
-        .footer-link {
-            color: var(--muted-foreground);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            min-height: 44px;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            white-space: nowrap;
-        }
-
-        .footer-link:hover {
-            color: var(--primary);
-            background: var(--muted);
-            transform: translateY(-1px);
-        }
-
-        .footer-link:active {
-            transform: scale(0.98);
-            background: var(--muted);
-        }
-
-        @media (max-width: 768px) {
-            .footer-link {
-                padding: 0.75rem 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .footer-link {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.8rem;
-                gap: 0.25rem;
-                min-height: 40px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .footer-link {
-                padding: 0.5rem;
-                font-size: 0.75rem;
-            }
-        }
-
-        .footer-link:hover {
-            color: var(--primary);
-            background: var(--muted);
-            transform: translateY(-1px);
-        }
-
-        .footer-link i {
-            font-size: 1rem;
-        }
-
-
-
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="/" class="logo">
-                <div class="logo-icon">
-                    <img src="/src/images/icon.webp" alt="DeepApi'S Logo">
-                </div>
-                DeepApi'S
-            </a>
-            <ul class="nav-links">
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="/docs">Documentation</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="/support">Support</a></li>
-            </ul>
-            <button class="mobile-menu" onclick="toggleMobileMenu()">
-                <i class="bi bi-list"></i>
-            </button>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="overview">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="bi bi-rocket-takeoff"></i>
-                    <span class="gradient-text-badge">REST API Platform</span>
-                </div>
-                <h1>DeepApi'S</h1>
-                <p>Powerful, scalable, and developer-friendly REST API platform. Build amazing applications with our comprehensive suite of APIs designed for modern development.</p>
-                <div class="cta-buttons">
-                    <a href="#features" class="btn btn-primary">
-                        <i class="bi bi-play-circle"></i>
-                        Get Started
-                    </a>
-                    <a href="/docs" class="btn btn-secondary">
-                        <i class="bi bi-book"></i>
-                        View Documentation
-                    </a>
-                </div>
+<nav class="nav">
+    <div class="nav-container">
+        <a href="/" class="logo">
+            <div class="logo-icon">
+                <img src="/src/images/icon.webp" alt="DeepApi'S Logo">
             </div>
-        </div>
-    </section>
+            DeepApi'S
+        </a>
+        <ul class="nav-links">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="/docs">Documentation</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="/support">Support</a></li>
+        </ul>
+        <button class="mobile-menu" onclick="toggleMobileMenu()">
+            <i class="bi bi-list"></i>
+        </button>
+    </div>
+</nav>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-title fade-in">
-                <h2>Why Choose DeepApi'S?</h2>
-                <p>Built by developers, for developers. We understand what you need to build amazing applications with our powerful REST API platform.</p>
+<!-- Hero Section reimagined -->
+<section class="hero" id="overview">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="bi bi-stars"></i>
+                <span class="gradient-text-badge">next-gen REST API platform</span>
             </div>
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="bi bi-lightning-fill"></i>
-                    </div>
-                    <h3>Lightning Fast</h3>
-                    <p>Optimized REST APIs with minimal latency for real-time applications. Average response time under 100ms.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="bi bi-shield-check"></i>
-                    </div>
-                    <h3>Enterprise Security</h3>
-                    <p>Bank-level security with OAuth 2.0, JWT tokens, and 99.9% uptime SLA guarantee for production applications.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="bi bi-code-slash"></i>
-                    </div>
-                    <h3>Developer First</h3>
-                    <p>RESTful APIs with comprehensive documentation, SDKs, and interactive examples for seamless integration.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="bi bi-headset"></i>
-                    </div>
-                    <h3>24/7 Support</h3>
-                    <p>Round-the-clock technical support with dedicated success managers for enterprise customers.</p>
-                </div>
+            <h1>DeepApi'S</h1>
+            <p>Lightning fast, secure, and developer-first REST API suite. Build scalable applications with our next-generation endpoints, real-time analytics, and enterprise reliability.</p>
+            <div class="cta-buttons">
+                <a href="#features" class="btn btn-primary"><i class="bi bi-lightning-charge-fill"></i> Get Started</a>
+                <a href="/docs" class="btn btn-secondary"><i class="bi bi-journal-code"></i> Documentation</a>
             </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq" id="faq">
-        <div class="container">
-            <div class="section-title fade-in">
-                <div class="faq-icon">
-                    <i class="bi bi-question-circle"></i>
-                </div>
-                <h2>Frequently Asked Questions</h2>
-                <p>Got questions? We've got answers. Find everything you need to know about DeepApi'S Hub.</p>
-            </div>
-            <div class="faq-container">
-                <div class="faq-item fade-in">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        How do I get started with DeepApi'S REST APIs?
-                        <i class="bi bi-chevron-down faq-chevron"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Getting started is simple! Sign up for a free account, get your API key from the dashboard, and start making HTTP requests to our REST endpoints. Our comprehensive documentation includes code examples in multiple programming languages to help you integrate quickly.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item fade-in">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        What REST API endpoints are available?
-                        <i class="bi bi-chevron-down faq-chevron"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            We offer 50+ REST API endpoints covering user management, data processing, file operations, authentication, analytics, and more. All endpoints follow RESTful conventions with standard HTTP methods (GET, POST, PUT, DELETE) and return JSON responses.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item fade-in">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        What authentication methods do you support?
-                        <i class="bi bi-chevron-down faq-chevron"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            We support multiple authentication methods including API keys, OAuth 2.0, JWT tokens, and Bearer tokens. You can authenticate via headers (Authorization: Bearer your-token) or query parameters depending on your security requirements.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item fade-in">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        What are the rate limits for API requests?
-                        <i class="bi bi-chevron-down faq-chevron"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Free tier: 1,000 requests/month. Pro tier: 100,000 requests/month. Enterprise: Unlimited. Rate limits are enforced per API key and reset monthly. We also support burst limits for handling traffic spikes.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item fade-in">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        Do you provide webhook support?
-                        <i class="bi bi-chevron-down faq-chevron"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Yes! We support webhooks for real-time notifications. You can configure webhook URLs to receive HTTP POST requests when specific events occur, such as user registrations, data updates, or system alerts.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item fade-in">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        What HTTP status codes do your APIs return?
-                        <i class="bi bi-chevron-down faq-chevron"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Our APIs return standard HTTP status codes: 200 (Success), 201 (Created), 400 (Bad Request), 401 (Unauthorized), 403 (Forbidden), 404 (Not Found), 429 (Rate Limited), and 500 (Server Error). All error responses include detailed error messages and error codes.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item fade-in">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        Can I test APIs without authentication?
-                        <i class="bi bi-chevron-down faq-chevron"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Yes! We provide a public sandbox environment where you can test most endpoints without authentication. Visit our documentation page to try our interactive API explorer with sample requests and responses.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item fade-in">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        Do you offer SDKs for different programming languages?
-                        <i class="bi bi-chevron-down faq-chevron"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Absolutely! We provide official SDKs for JavaScript/Node.js, Python, PHP, Java, C#, Go, and Ruby. All SDKs are open-source, regularly updated, and include comprehensive documentation with examples.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item fade-in">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        How do I handle API errors and retries?
-                        <i class="bi bi-chevron-down faq-chevron"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Implement exponential backoff for retries (1s, 2s, 4s, 8s). Retry on 5xx errors and network timeouts. Don't retry 4xx errors except 429 (rate limit). Our SDKs include built-in retry logic with configurable parameters.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal -->
-    <div class="modal" id="apiModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">API Endpoint</h3>
-                <button class="close-btn" onclick="closeModal()">&times;</button>
-            </div>
-            <div id="modalBody">
-                <!-- Dynamic content will be inserted here -->
+            <div class="hero-stats">
+                <div class="stat-item"><div class="stat-number">99.9%</div><div class="stat-label">Uptime SLA</div></div>
+                <div class="stat-item"><div class="stat-number"><100ms</div><div class="stat-label">Avg Latency</div></div>
+                <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">API Endpoints</div></div>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- Footer Section -->
-    <footer class="main-footer" role="contentinfo">
+<!-- Features -->
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Why DeepApi'S?</h2>
+            <p style="color: #9ca3af;">Engineered for performance, crafted for developers.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card fade-in"><div class="feature-icon"><i class="bi bi-speedometer2"></i></div><h3>Lightning Fast</h3><p>Optimized edge-ready REST APIs with average response <100ms and real-time streaming support.</p></div>
+            <div class="feature-card fade-in"><div class="feature-icon"><i class="bi bi-shield-lock-fill"></i></div><h3>Zero-Trust Security</h3><p>OAuth 2.1, mTLS, and JWT with rotating keys. Enterprise-grade encryption at rest and in transit.</p></div>
+            <div class="feature-card fade-in"><div class="feature-icon"><i class="bi bi-code-square"></i></div><h3>Developer Joy</h3><p>Interactive API explorer, OpenAPI spec, SDKs for 8+ languages and automatic type-safe clients.</p></div>
+            <div class="feature-card fade-in"><div class="feature-icon"><i class="bi bi-headset"></i></div><h3>24/7 Engineering Support</h3><p>Dedicated Slack channel and ticket system with <30m response for enterprise, community forum included.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq" id="faq">
+    <div class="container">
+        <div class="section-title fade-in">
+            <div class="faq-icon"><i class="bi bi-question-circle-fill"></i></div>
+            <h2>Frequently Asked Questions</h2>
+            <p>Everything you need to know about DeepApi'S ecosystem</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item fade-in"><button class="faq-question" onclick="toggleFaq(this)">How do I get started with DeepApi'S REST APIs?<i class="bi bi-chevron-down faq-chevron"></i></button><div class="faq-answer"><div class="faq-answer-content">Sign up free, grab your API key from dashboard, and call our endpoints via HTTPS. Docs include examples in cURL, Python, Node, and more.</div></div></div>
+            <div class="faq-item fade-in"><button class="faq-question" onclick="toggleFaq(this)">What REST API endpoints are available?<i class="bi bi-chevron-down faq-chevron"></i></button><div class="faq-answer"><div class="faq-answer-content">Over 50 production endpoints covering Users, Analytics, Storage, AI inference, Webhooks, and real-time messaging. All follow strict REST semantics.</div></div></div>
+            <div class="faq-item fade-in"><button class="faq-question" onclick="toggleFaq(this)">What authentication methods do you support?<i class="bi bi-chevron-down faq-chevron"></i></button><div class="faq-answer"><div class="faq-answer-content">API Keys, Bearer JWT, OAuth2 (client credentials + auth code). All requests must use HTTPS and tokens support scoped permissions.</div></div></div>
+            <div class="faq-item fade-in"><button class="faq-question" onclick="toggleFaq(this)">What are the rate limits for API requests?<i class="bi bi-chevron-down faq-chevron"></i></button><div class="faq-answer"><div class="faq-answer-content">Free: 1k req/month, Pro: 100k/month, Enterprise: custom high-volume. Burst limits up to 100 req/sec for premium tiers.</div></div></div>
+            <div class="faq-item fade-in"><button class="faq-question" onclick="toggleFaq(this)">Do you provide webhook support?<i class="bi bi-chevron-down faq-chevron"></i></button><div class="faq-answer"><div class="faq-answer-content">Yes! Configure webhooks to receive real-time POST notifications for events like user.signup, payment.success, or data sync.</div></div></div>
+            <div class="faq-item fade-in"><button class="faq-question" onclick="toggleFaq(this)">What HTTP status codes do your APIs return?<i class="bi bi-chevron-down faq-chevron"></i></button><div class="faq-answer"><div class="faq-answer-content">Standard: 200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Missing, 429 Rate limit, 500 internal error + error codes in body.</div></div></div>
+            <div class="faq-item fade-in"><button class="faq-question" onclick="toggleFaq(this)">Can I test APIs without authentication?<i class="bi bi-chevron-down faq-chevron"></i></button><div class="faq-answer"><div class="faq-answer-content">Absolutely! Our sandbox environment (docs) provides mock endpoints and public playground for testing without credentials.</div></div></div>
+            <div class="faq-item fade-in"><button class="faq-question" onclick="toggleFaq(this)">Do you offer SDKs for different programming languages?<i class="bi bi-chevron-down faq-chevron"></i></button><div class="faq-answer"><div class="faq-answer-content">Official SDKs: JS/TS, Python, Go, Java, Ruby, PHP, C#, Rust. All open-source and fully typed.</div></div></div>
+            <div class="faq-item fade-in"><button class="faq-question" onclick="toggleFaq(this)">How do I handle API errors and retries?<i class="bi bi-chevron-down faq-chevron"></i></button><div class="faq-answer"><div class="faq-answer-content">Implement exponential backoff (1s,2s,4s) for 5xx errors. Our SDKs have built-in retry with configurable max attempts.</div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Structure (unified) -->
+<div class="modal" id="apiModal">
+    <div class="modal-content">
+        <div class="modal-header" style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+            <h3 id="modalTitle" style="color: #fff;">API Endpoint</h3>
+            <button class="close-btn" onclick="closeModal()" style="background: none; border: none; font-size: 1.8rem; color: #9ca3af; cursor: pointer;">&times;</button>
+        </div>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<footer class="main-footer">
+    <div class="container">
         <div class="footer-content">
-            <div class="copyright">&copy; 2025 DeepApi'S Corp. All rights reserved.</div>
-            
-            <nav class="footer-links" aria-label="Additional links">
-                <a href="https://whatsapp.com/channel/0029VavkMqsAe5VkLqjzgR2d" target="_blank" rel="noopener noreferrer" class="footer-link">
-                    <i class="bi bi-whatsapp"></i> Info
-                </a>
-                <a href="mailto:officialveylorn@gmail.com" class="footer-link">
-                    <i class="bi bi-envelope"></i> Contact
-                </a>
+            <div class="copyright">&copy; 2025 DeepApi'S Corp. — REST API ecosystem</div>
+            <nav class="footer-links" style="display: flex; gap: 1.8rem;">
+                <a href="https://whatsapp.com/channel/0029VavkMqsAe5VkLqjzgR2d" target="_blank" class="footer-link"><i class="bi bi-whatsapp"></i> Info</a>
+                <a href="mailto:officialveylorn@gmail.com" class="footer-link"><i class="bi bi-envelope"></i> Contact</a>
             </nav>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        const apiEndpoints = {
-            users: {
-                title: 'GET /api/users',
-                method: 'GET',
-                url: '/api/users',
-                description: 'Retrieve a paginated list of all users',
-                parameters: [
-                    { name: 'page', type: 'number', description: 'Page number (default: 1)' },
-                    { name: 'limit', type: 'number', description: 'Items per page (default: 10)' }
-                ]
-            },
-            user: {
-                title: 'GET /api/users/{id}',
-                method: 'GET',
-                url: '/api/users/{id}',
-                description: 'Get detailed information about a specific user',
-                parameters: [
-                    { name: 'id', type: 'string', description: 'User ID', required: true }
-                ]
-            },
-            createUser: {
-                title: 'POST /api/users',
-                method: 'POST',
-                url: '/api/users',
-                description: 'Create a new user account',
-                parameters: [
-                    { name: 'name', type: 'string', description: 'User full name', required: true },
-                    { name: 'email', type: 'email', description: 'User email address', required: true },
-                    { name: 'password', type: 'password', description: 'User password', required: true }
-                ]
-            },
-            updateUser: {
-                title: 'PUT /api/users/{id}',
-                method: 'PUT',
-                url: '/api/users/{id}',
-                description: 'Update an existing user\'s information',
-                parameters: [
-                    { name: 'id', type: 'string', description: 'User ID', required: true },
-                    { name: 'name', type: 'string', description: 'User full name' },
-                    { name: 'email', type: 'email', description: 'User email address' }
-                ]
-            },
-            deleteUser: {
-                title: 'DELETE /api/users/{id}',
-                method: 'DELETE',
-                url: '/api/users/{id}',
-                description: 'Permanently delete a user account',
-                parameters: [
-                    { name: 'id', type: 'string', description: 'User ID', required: true }
-                ]
-            },
-            posts: {
-                title: 'GET /api/posts',
-                method: 'GET',
-                url: '/api/posts',
-                description: 'Fetch all posts with filtering options',
-                parameters: [
-                    { name: 'author', type: 'string', description: 'Filter by author ID' },
-                    { name: 'category', type: 'string', description: 'Filter by category' },
-                    { name: 'sort', type: 'string', description: 'Sort order (date, title, author)' }
-                ]
-            }
-        };
-
-        function openModal(endpointId) {
-            const endpoint = apiEndpoints[endpointId];
-            if (!endpoint) return;
-
-            document.getElementById('modalTitle').textContent = endpoint.title;
-            
-            const modalBody = document.getElementById('modalBody');
-            modalBody.innerHTML = `
-                <p style="margin-bottom: 1.5rem; color: var(--muted-foreground);">${endpoint.description}</p>
-                
-                <form onsubmit="testEndpoint(event, '${endpointId}')">
-                    ${endpoint.parameters.map(param => `
-                        <div class="form-group">
-                            <label for="${param.name}">
-                                ${param.name} ${param.required ? '*' : ''}
-                                <span style="font-weight: normal; color: var(--muted-foreground);">(${param.type})</span>
-                            </label>
-                            <input 
-                                type="${param.type}" 
-                                id="${param.name}" 
-                                name="${param.name}" 
-                                placeholder="${param.description}"
-                                ${param.required ? 'required' : ''}
-                            >
-                        </div>
-                    `).join('')}
-                    
-                    <button type="submit" class="btn btn-primary" style="margin-bottom: 1.5rem;">
-                        Test ${endpoint.method} Request
-                    </button>
-                </form>
-                
-                <div style="margin-top: 1.5rem;">
-                    <h4 style="margin-bottom: 0.5rem;">Response:</h4>
-                    <div class="response-area" id="responseArea">Click "Test Request" to see the response</div>
-                </div>
-            `;
-
-            document.getElementById('apiModal').style.display = 'block';
-        }
-
-        function closeModal() {
-            document.getElementById('apiModal').style.display = 'none';
-        }
-
-        function testEndpoint(event, endpointId) {
-            event.preventDefault();
-            const endpoint = apiEndpoints[endpointId];
-            const formData = new FormData(event.target);
-            const params = {};
-            
-            for (let [key, value] of formData.entries()) {
-                if (value) params[key] = value;
-            }
-
-            const mockResponse = {
-                status: 200,
-                message: 'Success',
-                data: endpoint.method === 'GET' ? 
-                    (endpointId === 'users' ? [
-                        { id: 1, name: 'John Doe', email: 'john@example.com' },
-                        { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
-                    ] : { id: 1, name: 'John Doe', email: 'john@example.com' }) :
-                    { message: `${endpoint.method} operation completed successfully` },
-                timestamp: new Date().toISOString()
-            };
-
-            document.getElementById('responseArea').textContent = JSON.stringify(mockResponse, null, 2);
-        }
-
-        function toggleFaq(button) {
-            const faqItem = button.parentElement;
-            const answer = faqItem.querySelector('.faq-answer');
-            const isActive = faqItem.classList.contains('active');
-            
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-                item.querySelector('.faq-answer').classList.remove('active');
-            });
-            
-            if (!isActive) {
-                faqItem.classList.add('active');
-                answer.classList.add('active');
-            }
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('apiModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('mobile-active');
-        }
-
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav');
-            
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
-                nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
-                nav.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
-            }
-        });
-
-    </script>
+<script>
+    // ---- Api Endpoints Data (same structure, enhanced)
+    const apiEndpoints = {
+        users: { title: 'GET /api/users', method: 'GET', url: '/api/users', description: 'Retrieve paginated list of users.', parameters: [{ name: 'page', type: 'number', description: 'Page number' }, { name: 'limit', type: 'number', description: 'Items per page' }] },
+        user: { title: 'GET /api/users/{id}', method: 'GET', url: '/api/users/{id}', description: 'Get specific user by ID.', parameters: [{ name: 'id', type: 'text', description: 'User ID', required: true }] },
+        createUser: { title: 'POST /api/users', method: 'POST', url: '/api/users', description: 'Create new user', parameters: [{ name: 'name', type: 'text', required: true, description: 'Full name' }, { name: 'email', type: 'email', required: true, description: 'Email' }, { name: 'password', type: 'password', required: true, description: 'Password' }] },
+        updateUser: { title: 'PUT /api/users/{id}', method: 'PUT', url: '/api/users/{id}', description: 'Update user fields', parameters: [{ name: 'id', type: 'text', required: true, description: 'User ID' }, { name: 'name', type: 'text', description: 'New name' }, { name: 'email', type: 'email', description: 'New email' }] },
+        deleteUser: { title: 'DELETE /api/users/{id}', method: 'DELETE', url: '/api/users/{id}', description: 'Delete user permanently', parameters: [{ name: 'id', type: 'text', required: true, description: 'User ID' }] },
+        posts: { title: 'GET /api/posts', method: 'GET', url: '/api/posts', description: 'Fetch posts with filters', parameters: [{ name: 'author', type: 'text', description: 'Filter author ID' }, { name: 'category', type: 'text', description: 'Category slug' }, { name: 'sort', type: 'text', description: 'Sort order' }] }
+    };
+    function openModal(endpointId) {
+        const ep = apiEndpoints[endpointId];
+        if (!ep) return;
+        document.getElementById('modalTitle').innerText = ep.title;
+        const modalBody = document.getElementById('modalBody');
+        modalBody.innerHTML = `<p style="margin-bottom:1.5rem; color:#9ca3af;">${ep.description}</p>
+            <form onsubmit="testEndpoint(event, '${endpointId}')">
+                ${ep.parameters.map(p => `<div class="form-group" style="margin-bottom:1rem;"><label style="display:block;margin-bottom:0.3rem;font-weight:500;">${p.name} ${p.required ? '*' : ''}<span style="color:#6b7280;"> (${p.type})</span></label><input type="${p.type === 'number' ? 'number' : (p.type === 'email' ? 'email' : (p.type === 'password' ? 'password' : 'text'))}" name="${p.name}" placeholder="${p.description}" ${p.required ? 'required' : ''} style="width:100%;padding:0.7rem;background:#0f1117;border:1px solid #2a2e3a;border-radius:12px;color:#fff;"></div>`).join('')}
+                <button type="submit" class="btn btn-primary" style="margin:0.5rem 0 1.2rem;">Test ${ep.method} Request</button>
+            </form>
+            <div><h4 style="margin-bottom:8px;">Response Preview</h4><div class="response-area" id="responseArea">Click to test endpoint</div></div>`;
+        document.getElementById('apiModal').style.display = 'flex';
+    }
+    function closeModal() { document.getElementById('apiModal').style.display = 'none'; }
+    function testEndpoint(event, endpointId) {
+        event.preventDefault();
+        const ep = apiEndpoints[endpointId];
+        const form = event.target;
+        const params = new FormData(form);
+        let paramObj = {};
+        for(let [k,v] of params.entries()) if(v) paramObj[k]=v;
+        const mockResponse = { status: 200, message: 'Success (simulated)', timestamp: new Date().toISOString(), data: ep.method === 'GET' ? { items: [{ id: 1, name: 'Developer Sample' }], total: 1 } : { operation: `${ep.method} completed`, affected: paramObj } };
+        document.getElementById('responseArea').innerText = JSON.stringify(mockResponse, null, 2);
+    }
+    function toggleFaq(button) {
+        const faqItem = button.closest('.faq-item');
+        const answerDiv = faqItem.querySelector('.faq-answer');
+        const isActive = faqItem.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(item => { item.classList.remove('active'); item.querySelector('.faq-answer')?.classList.remove('active'); });
+        if (!isActive) { faqItem.classList.add('active'); answerDiv.classList.add('active'); }
+        else { faqItem.classList.remove('active'); answerDiv.classList.remove('active'); }
+    }
+    window.onclick = function(e) { if(e.target === document.getElementById('apiModal')) closeModal(); };
+    function toggleMobileMenu() { document.querySelector('.nav-links').classList.toggle('mobile-active'); }
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e){ e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if(target) target.scrollIntoView({ behavior: 'smooth' }); if(window.innerWidth<=768) document.querySelector('.nav-links')?.classList.remove('mobile-active'); }); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    window.addEventListener('scroll', () => { const nav = document.querySelector('.nav'); if(window.scrollY > 60) nav.style.background = 'rgba(10,12,16,0.95)'; else nav.style.background = 'rgba(10,12,16,0.85)'; });
+    // attach modal to feature card (just to keep same interactive demo)
+    document.querySelectorAll('.feature-card').forEach((card, idx) => { if(idx===0) card.style.cursor = 'pointer'; if(idx===0) card.addEventListener('click', () => openModal('users')); });
+    document.querySelectorAll('.feature-card .btn').forEach(el => el?.stopPropagation?.());
+</script>
 </body>
 </html>
+```
